@@ -20,8 +20,9 @@ jobs:
           context_name: 'dolibarr'
           ssh_cert: ${{ secrets.SSH_CERT }}
           ssh_key: ${{ secrets.SSH_KEY }}
+          use_context: true
 
-      - run: docker context use dolibarr
+      # - run: docker context use dolibarr
       - run: docker ps
 
 
