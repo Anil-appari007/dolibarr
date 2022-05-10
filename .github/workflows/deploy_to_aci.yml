@@ -1,0 +1,25 @@
+#
+name: DOLIBARR_DEPLOY_TO_ACI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Docker login to ACI
+      run:  docker login azure --client-id ${{ CLIENT_ID }} --client-secret ${{ CLIENT_SECRET }} --tenant-id ${{ TENANT_ID }}
+
+    - name: Docker compose up
+      run: cd build/docker && docker-compose --context dolibarr --project-name DOLIBARR up -d
+
+    - name: get ip
+      run: sleep 120 && docker --context=dolibarr ps  
