@@ -14,10 +14,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # - uses: actions/checkout@v3
-    - name: docker-check
-      run:  echo ${{secrets.DOCKERCONTEXT}} | docker context import dolibarr-docker-server -
-      
-    - name: check1
-      run: docker context use dolibarr-docker-server && docker ps
+      - uses: arwynfr/actions-docker-context@v2
+        with:
+          docker_host: 'ssh://anil@20.84.92.143'
+          context_name: 'dolibarr'
+          ssh_cert: ${{ secrets.SSH_CERT }}
+          ssh_key: ${{ secrets.SSH_KEY }}
+
+      - run: docker --context dolibarr ps
+
 
