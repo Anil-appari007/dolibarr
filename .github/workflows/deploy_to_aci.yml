@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Docker login to ACI
-      run:  docker login azure --client-id ${{ CLIENT_ID }} --client-secret ${{ CLIENT_SECRET }} --tenant-id ${{ TENANT_ID }}
+      run:  docker login azure --client-id ${{ seecrets.CLIENT_ID }} --client-secret ${{ secrets.CLIENT_SECRET }} --tenant-id ${{ secrets.TENANT_ID }}
 
     - name: Docker compose up
       run: cd build/docker && docker-compose --context dolibarr --project-name DOLIBARR up -d
