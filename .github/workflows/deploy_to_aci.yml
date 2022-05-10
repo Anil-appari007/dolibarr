@@ -14,17 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Docker login to ACI
-      run:  docker login azure #--client-id ${{ secrets.CLIENT_ID }} --client-secret ${{ secrets.CLIENT_SECRET }} --tenant-id ${{ secrets.TENANT_ID }}
-
-    - name: Docker compose up
-      run: cd build/docker && docker-compose --context dolibarr --project-name DOLIBARR up -d
-
-    - name: get ip
-      run: sleep 120 && docker --context=dolibarr ps  
+    # - uses: actions/checkout@v3
+    - name: docker-check
+      run:  echo ${{secrets.dockercontext}} > my-remote-server.dockercontext && docker context import dolibarr-docker-server my-remote-server.dockercontext
+    - name: check1
+      run: docker context use dolibarr-docker-server && docker ps
