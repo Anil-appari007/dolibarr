@@ -16,7 +16,7 @@ jobs:
     steps:
     # - uses: actions/checkout@v3
     - name: docker-check
-      run:  echo ${{secrets.dockercontext}} > my-remote-server.dockercontext && docker context import dolibarr-docker-server my-remote-server.dockercontext
+      run:  echo ${{secrets.DOCKERCONTEXT}} > my-remote-server.dockercontext && docker context import dolibarr-docker-server my-remote-server.dockercontext
     - name: check1
       run: docker context use dolibarr-docker-server && docker ps
 
