@@ -45,9 +45,9 @@ stages:
       inputs:
         sshEndpoint: 'ssh-100'
         runOptions: 'inline'
-        inline: |
-          echo TAG=$(tag) > build/docker/.env 
-          echo IMAGE_NAME=$(containerRegistry)/$(imageRepository):$(tag) >> build/docker/.env 
+        inline: | 
+          echo TAG=$(tag) > .env 
+          echo IMAGE_NAME=$(containerRegistry)/$(imageRepository):$(tag) >> .env 
           
-          cat build/docker/.env
+          cat .env
         readyTimeout: '20000'
