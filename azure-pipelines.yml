@@ -60,5 +60,5 @@ stages:
       inputs:
         sshEndpoint: 'ssh-100'
         runOptions: 'commands'
-        commands: 'ls /opt/DOLIBARR && cat docker-compose.yml && cat .env'
+        commands: 'cd /opt/DOLIBARR && docker-compose --env-file ./.env up -d '
         readyTimeout: '20000'
