@@ -32,7 +32,7 @@ services:
 
     web:
         #build: .
-        image: ${IMAGE_NAME}:${TAG}  #anilsdolibarr.azurecr.io/dolibarr:9
+        image: ${IMAGE_NAME}  #anilsdolibarr.azurecr.io/dolibarr:9
         environment:
             HOST_USER_ID: $HOST_USER_ID
         volumes:
