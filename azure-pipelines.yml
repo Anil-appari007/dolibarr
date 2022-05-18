@@ -42,6 +42,7 @@ stages:
         runOptions: 'inline'
         inline: | 
           sudo mkdir /opt/DOLIBARR 2> /dev/null 
+          sudo chown -R $(whoami):$(whoami) /opt/DOLIBARR
           echo TAG=$(tag) > /opt/DOLIBARR/.env 
           echo IMAGE_NAME=$(containerRegistry)/$(imageRepository):$(tag) >> /opt/DOLIBARR/.env 
           
@@ -59,5 +60,5 @@ stages:
       inputs:
         sshEndpoint: 'ssh-100'
         runOptions: 'commands'
-        commands: 'ls /opt/DOLLIBAR'
+        commands: 'ls /opt/DOLLIBAR && cat docker-compose.yml && cat .env'
         readyTimeout: '20000'
