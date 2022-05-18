@@ -34,3 +34,9 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'ssh-100'
+        runOptions: 'commands'
+        commands: 'docker compose up -d'
+        readyTimeout: '20000'
