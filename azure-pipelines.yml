@@ -55,12 +55,9 @@ stages:
         contents: 'docker-compose.yml'
         targetFolder: '/opt/DOLLIBAR'
         readyTimeout: '20000'
-    
-
-
     - task: SSH@0
-    inputs:
-      sshEndpoint: 'ssh-100'
-      runOptions: 'commands'
-      commands: 'ls /opt/DOLLIBAR'
-      readyTimeout: '20000'
+      inputs:
+        sshEndpoint: 'ssh-100'
+        runOptions: 'commands'
+        commands: 'ls /opt/DOLLIBAR'
+        readyTimeout: '20000'
