@@ -34,20 +34,33 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    # - task: SSH@0
-    #   inputs:
-    #     sshEndpoint: 'ssh-100'
-    #     runOptions: 'commands'
-    #     commands: ' echo TAG=${buildid} > with-version/.env  docker compose up -d'
-    #     readyTimeout: '20000'
+
 
     - task: SSH@0
       inputs:
         sshEndpoint: 'ssh-100'
         runOptions: 'inline'
         inline: | 
-          echo TAG=$(tag) > .env 
-          echo IMAGE_NAME=$(containerRegistry)/$(imageRepository):$(tag) >> .env 
+          sudo mkdir /opt/DOLIBARR 2> /dev/null 
+          echo TAG=$(tag) > /opt/DOLIBARR/.env 
+          echo IMAGE_NAME=$(containerRegistry)/$(imageRepository):$(tag) >> /opt/DOLIBARR/.env 
           
-          cat .env
+          cat /opt/DOLIBARR/.env
         readyTimeout: '20000'
+    
+    - task: CopyFilesOverSSH@0
+      inputs:
+        sshEndpoint: 'ssh-100'
+        sourceFolder: 'build/docker'
+        contents: 'docker-compose.yml'
+        targetFolder: '/opt/DOLLIBAR'
+        readyTimeout: '20000'
+    
+
+
+    - task: SSH@0
+    inputs:
+      sshEndpoint: 'ssh-100'
+      runOptions: 'commands'
+      commands: 'ls /opt/DOLLIBAR'
+      readyTimeout: '20000'
