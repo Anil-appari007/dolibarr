@@ -68,4 +68,12 @@ stages:
         sshEndpoint: 'ssh-100'
         runOptions: 'commands'
         commands: 'cd /opt/DOLIBARR && docker-compose up -d '
+        failOnStdErr: false
         readyTimeout: '20000'
+    
+    # - task: SSH@0
+    #   inputs:
+    #     runOptions: 'commands'
+    #     commands: 'ls'
+    #     failOnStdErr: false
+    #     readyTimeout: '20000'
