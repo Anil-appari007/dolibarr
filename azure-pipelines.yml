@@ -63,9 +63,9 @@ stages:
         contents: '**'
         targetFolder: '/opt/DOLIBARR'
         readyTimeout: '20000'
-    # - task: SSH@0
-    #   inputs:
-    #     sshEndpoint: 'ssh-100'
-    #     runOptions: 'commands'
-    #     commands: 'cd /opt/DOLIBARR && docker-compose --env-file ./.env up -d '
-    #     readyTimeout: '20000'
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'ssh-100'
+        runOptions: 'commands'
+        commands: 'cd /opt/DOLIBARR && docker-compose up -d '
+        readyTimeout: '20000'
