@@ -56,9 +56,16 @@ stages:
         contents: 'docker-compose.yml'
         targetFolder: '/opt/DOLIBARR'
         readyTimeout: '20000'
-    - task: SSH@0
+    - task: CopyFilesOverSSH@0
       inputs:
         sshEndpoint: 'ssh-100'
-        runOptions: 'commands'
-        commands: 'cd /opt/DOLIBARR && docker-compose --env-file ./.env up -d '
+        sourceFolder: './'
+        contents: '**'
+        targetFolder: '/opt/DOLIBARR'
         readyTimeout: '20000'
+    # - task: SSH@0
+    #   inputs:
+    #     sshEndpoint: 'ssh-100'
+    #     runOptions: 'commands'
+    #     commands: 'cd /opt/DOLIBARR && docker-compose --env-file ./.env up -d '
+    #     readyTimeout: '20000'
