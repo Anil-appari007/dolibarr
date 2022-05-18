@@ -14,8 +14,8 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/build/docker/Dockerfile'
   tag: '$(Build.BuildId)'
 
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+pool:
+  name: Default
 
 stages:
 - stage: Build
@@ -23,8 +23,7 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      vmImage: $(vmImageName)
+
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
